@@ -69,3 +69,10 @@
 1. Configurar arquivo **DOCKER-COMPOSE.YML**   
 2. Comando de execução do Compose:   
 ```docker-compose up```
+------------------------------
+## Geração de Token
+1. Configurar uma secret *./infra/configs.ts*:   
+   ```Javascript
+   secret = "suaSecret"
+   ```
+2. Gerar o token no script [GeradotTokenJWT](https://github.com/TriGaucho/geradorTokenJWT)
