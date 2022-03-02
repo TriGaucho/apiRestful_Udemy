@@ -5,6 +5,7 @@ import * as cors from 'cors'
 import DataBase from './infra/dataBase'
 import NewsController from './controller/newsController'
 import Auth from './infra/auth'
+import uploads from './infra/uploads'
 
 class StartUp{
     public app: express.Application
@@ -42,8 +43,14 @@ class StartUp{
             res.send({ versao: '0.0.1'})
         })
 
-        this.app.use(Auth.validade)
-
+        // this.app.use(Auth.validade)
+        this.app.route('/uploads').post(uploads.single("file"), (req, res) => {
+            try {
+                res.send("Arquivo enviado !")
+            } catch (error) {
+                console.log(error)
+            }
+        })
         this.app.route('/api/v1/news').get(NewsController.get)
         this.app.route('/api/v1/news/:id').get(NewsController.getById)
         this.app.route('/api/v1/news').post(NewsController.create)
